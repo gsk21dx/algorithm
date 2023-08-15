@@ -51,7 +51,14 @@ void up(int u)
         u /= 2;
     }
 }
-
+// void up(int u)
+// {
+//     while (u / 2 && h[u] < h[u / 2])
+//     {
+//         heap_swap(u, u / 2);
+//         u >>= 1;
+//     }
+// }
 int main()
 {
     int n;
@@ -99,3 +106,56 @@ int main()
 
     return 0;
 }
+/*
+#include<bits/stdc++.h>
+#define N 500010
+#define NN 5010
+#define NNN 510
+#define INF 0x3f3f3f3f
+#define pi 3.1415926535897932384626433
+typedef long long ll;
+const int mod=1e9+7;
+
+using namespace std;
+
+int a[N],cnt=0;
+
+int main()
+{
+    int n;
+    multiset<int> s;
+    cin>>n;
+    for (int i=1;i<=n;i++)
+    {
+        string t;
+        int x,y;
+        cin>>t;
+        if (t=="I")
+        {
+            cin>>x;
+            s.insert(x);
+            a[++cnt]=x;
+        }
+        if (t=="PM") cout<<*s.begin()<<endl;
+        if (t=="DM") s.erase(s.find(*s.begin()));
+        if (t=="D")
+        {
+            cin>>x;
+            if (s.find(a[x])!=s.end()) s.erase(s.find(a[x]));
+        }
+        if (t=="C")
+        {
+            cin>>x>>y;
+            if (s.find(a[x])!=s.end()) s.erase(s.find(a[x]));
+            a[x]=y;
+            s.insert(y);
+        }
+    }
+    return 0;
+}
+
+作者：ex_jason
+链接：https://www.acwing.com/solution/content/6100/
+来源：AcWing
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+*/
