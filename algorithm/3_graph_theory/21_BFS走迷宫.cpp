@@ -1,3 +1,9 @@
+//axwing844.走迷宫
+/*目录
+    1.模拟队列+bfs
+    2.stl队列+bfs
+*/
+//1.模拟队列+bfs
 #include<iostream>
 #include<algorithm>
 #include<cstring>
@@ -50,6 +56,60 @@ int bfs()
         x = t.first, y = t.second;
     }
 
+    return d[n - 1][m - 1];//返回到终点的距离
+}
+
+int main()
+{
+    cin >> n >> m;
+
+    for(int i = 0; i < n; i ++)
+        for(int j = 0; j < m; j ++)
+            cin >> g[i][j];
+
+    cout << bfs() << endl;
+    
+    return 0;
+}
+//1.模拟队列+bfs
+#include<iostream>
+#include<algorithm>
+#include<cstring>
+#include <queue>
+
+using namespace std;
+
+const int N = 100;
+
+typedef pair<int, int> PII;
+
+int n, m;
+int g[N][N];//存迷宫
+int d[N][N];//存每一个点到起点的距离
+queue <PII> q;//队列
+int dx[4] = {-1, 0, 1, 0}, dy[4] = {0, 1, 0, -1};//往每个方向走x, y坐标分别改变的量
+
+int bfs()
+{
+    q.push({0, 0});
+    memset(d, -1, sizeof d);
+    d[0][0] = 0;
+
+    while(!q.empty())
+    {
+        auto t = q.front();//取出队头元素
+        q.pop();//出队
+        for(int i = 0; i < 4; i ++)//遍历往四个方向走的情况
+        {
+            int x = t.first + dx[i], y = t.second + dy[i];
+            if(x >= 0 && x < n && y >= 0 && y < m && g[x][y] == 0 && d[x][y] == -1)
+            //x, y在范围内, 且g[x][y]为可以走的, 且这个点没有走过
+            {
+                d[x][y] = d[t.first][t.second] + 1;
+                q.push({x, y});//x,y入队 
+            }
+        }
+    }
     return d[n - 1][m - 1];//返回到终点的距离
 }
 
