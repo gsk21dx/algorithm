@@ -23,12 +23,12 @@ bool topsort()// 判断是否有拓扑序列, 如果有, 队列q中存储的就�
 {
     int hh = 0, tt = -1;
 
-    for(int i = 1; i <= n;  i ++)// 入度为零的点可以作为起点, 入队
+    for(int i = 1; i <= n;  i ++)// 入度为零的点作为起点, 入队
         if(!d[i])
             q[++ tt] = i;
 
     while(hh <= tt)
-    {
+{
         int t = q[hh ++];
 
         for(int i = h[t]; i != -1; i = ne[i])// 当前点被拿走之后, 剩下的点中入度为零的点又可以作为起点, 入队
@@ -58,7 +58,7 @@ int main()
 
     if(topsort() )
     {
-        for(int i = 0; i < n; i ++) printf("%d ", q[i]);
+        for(int i = 0; i < n; i ++) printf("%d ", q[i]);//对模拟队列的理解：出对入队只是下标发生的，而存入的数据没有删去
         puts("");
     }
     else puts("-1");
