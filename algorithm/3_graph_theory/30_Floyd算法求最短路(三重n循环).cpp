@@ -2,7 +2,7 @@
 //三重循环， k在最外层，f（k，i，j）将k作为中间点，比较 i到j 和 i到k到j 的距离，取最小值
 //可以存在负权边，但不能存在负权回路
 //时间复杂度为O(n^3)
-//基于动态规划的算法
+//基于动态规划的算法,状态转移方程：dist[i][j] = min(dist[i][j],dist[i][k] + dist[k][j])
 #include<cstdio>
 #include<iostream>
 #include<algorithm>
@@ -38,6 +38,7 @@ int main()
         scanf("%d%d%d", &a, &b, &w);
 
         d[a][b] = min(d[a][b], w);
+        //注意保存最小的边
     }
 
     floyd();
@@ -47,7 +48,9 @@ int main()
         int a, b;
         scanf("%d%d", &a, &b);
 
-        if(d[a][b] == INF) puts("impossible");
+        if(d[a][b] > INF / 2) puts("impossible");
+        //因为存在负权边 所以INF这个值可能会因为负值被更新 但值依然远大于INF/2
+        else printf("%d\n",dist[x][y]);
         else printf("%d\n", d[a][b]);
     }
 
